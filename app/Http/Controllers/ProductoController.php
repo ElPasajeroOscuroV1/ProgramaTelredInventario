@@ -39,24 +39,26 @@ class ProductoController extends Controller
     {
         $request->validate([
             'descripcion' => 'required|string|max:255',
-            'modelo' => 'required|string|max:255',
-            'cantidad' => 'required|integer',
-            'marca_id' => 'required|exists:marcas,id',
-            'preciodecompra' => 'required|numeric',
-            'precioventamayor' => 'required|numeric',
-            'preciotecnico' => 'required|numeric',
-            'psf' => 'required|numeric',
-            'ps' => 'required|numeric',
+            'modelo' => 'nullable|string|max:255',
+            'cantidad' => 'nullable|integer',
+            'marca_id' => 'nullable|exists:marcas,id',
+
+            'preciodecompra' => 'nullable|numeric',
+            'precioventamayor' => 'nullable|numeric',
+            'preciotecnico' => 'nullable|numeric',
+            'psf' => 'nullable|numeric',
+            'ps' => 'nullable|numeric',
         ]);
 
         // 1. Crear el producto
         $producto = Producto::create([
             'descripcion' => $request->descripcion,
-            'modelo' => $request->modelo,
-            'cantidad' => $request->cantidad,
+            'modelo' => $request->modelo ?? '',
+            'cantidad' => $request->cantidad ?? 0,
             'marca_id' => $request->marca_id, // corregido aquí
         ]);
 
+    /*
         // 2. Crear el precio (como es solo clave foránea, se crea vacío)
         $precio = $producto->precios()->create([
         'producto_id' => $producto->id
@@ -71,6 +73,18 @@ class ProductoController extends Controller
             'psf' => $request->psf,
             'ps' => $request->ps,
         ]);
+    */
+        $precio = $producto->precios()->create([]);
+
+        if ($request->preciodecompra || $request->precioventamayor || $request->preciotecnico || $request->psf || $request->ps) {
+            $precio->tipodeprecio()->create([
+                'preciodecompra' => $request->preciodecompra ?? 0,
+                'precioventamayor' => $request->precioventamayor ?? 0,
+                'preciotecnico' => $request->preciotecnico ?? 0,
+                'psf' => $request->psf ?? 0,
+                'ps' => $request->ps ?? 0,
+            ]);
+        }
 
         return redirect()->route('producto.index')->with('success', 'Producto creado correctamente');
     }
@@ -104,14 +118,15 @@ class ProductoController extends Controller
     {
         $request->validate([
             'descripcion' => 'required|string|max:255',
-            'modelo' => 'required|string|max:255',
-            'cantidad' => 'required|integer',
-            'marca_id' => 'required|exists:marcas,id',
-            'preciodecompra' => 'required|numeric',
-            'precioventamayor' => 'required|numeric',
-            'preciotecnico' => 'required|numeric',
-            'psf' => 'required|numeric',
-            'ps' => 'required|numeric',
+            'modelo' => 'nullable|string|max:255',
+            'cantidad' => 'nullable|integer',
+            'marca_id' => 'nullable|exists:marcas,id',
+
+            'preciodecompra' => 'nullable|numeric',
+            'precioventamayor' => 'nullable|numeric',
+            'preciotecnico' => 'nullable|numeric',
+            'psf' => 'nullable|numeric',
+            'ps' => 'nullable|numeric',
         ]);
 
         // Actualizar producto

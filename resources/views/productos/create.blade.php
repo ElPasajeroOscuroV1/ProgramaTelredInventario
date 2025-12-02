@@ -29,17 +29,18 @@
 
                 <div>
                     <label class="block font-semibold mb-1">Modelo:</label>
-                    <input type="text" name="modelo" required class="w-full px-3 py-2 rounded bg-gray-800 text-white border border-gray-600">
+                    <input type="text" name="modelo" value="{{ old('modelo', '') }}" class="w-full px-3 py-2 rounded bg-gray-800 text-white border border-gray-600">
                 </div>
 
                 <div>
                     <label class="block font-semibold mb-1">Cantidad:</label>
-                    <input type="number" name="cantidad" required class="w-full px-3 py-2 rounded bg-gray-800 text-white border border-gray-600">
+                    <input type="number" name="cantidad" value="{{ old('cantidad', 0) }}" class="w-full px-3 py-2 rounded bg-gray-800 text-white border border-gray-600">
                 </div>
 
                 <div>
                     <label class="block font-semibold mb-1">Marca:</label>
-                    <select name="marca_id" required class="w-full px-3 py-2 rounded bg-gray-800 text-white border border-gray-600">
+                    <select name="marca_id"  class="w-full px-3 py-2 rounded bg-gray-800 text-white border border-gray-600">
+                        <option value="">Sin marca</option>
                         @foreach($brands as $brand)
                             <option value="{{ $brand->id }}">{{ $brand->nombre }}</option>
                         @endforeach
@@ -51,23 +52,23 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block font-semibold mb-1">Precio de Compra:</label>
-                        <input type="number" step="0.01" name="preciodecompra" required class="w-full px-3 py-2 rounded bg-gray-800 text-white border border-gray-600">
+                        <input type="number" step="0.01" name="preciodecompra" value="{{ old('preciodecompra', 0) }}" class="w-full px-3 py-2 rounded bg-gray-800 text-white border border-gray-600">
                     </div>
                     <div>
                         <label class="block font-semibold mb-1">Precio Venta Mayor:</label>
-                        <input type="number" step="0.01" name="precioventamayor" required class="w-full px-3 py-2 rounded bg-gray-800 text-white border border-gray-600">
+                        <input type="number" step="0.01" name="precioventamayor" value="{{ old('precioventamayor', 0) }}" class="w-full px-3 py-2 rounded bg-gray-800 text-white border border-gray-600">
                     </div>
                     <div>
                         <label class="block font-semibold mb-1">Precio Técnico:</label>
-                        <input type="number" step="0.01" name="preciotecnico" required class="w-full px-3 py-2 rounded bg-gray-800 text-white border border-gray-600">
+                        <input type="number" step="0.01" name="preciotecnico" value="{{ old('preciotecnico', 0) }}" class="w-full px-3 py-2 rounded bg-gray-800 text-white border border-gray-600">
                     </div>
                     <div>
                         <label class="block font-semibold mb-1">PSF (Precio sin factura):</label>
-                        <input type="number" step="0.01" name="psf" required class="w-full px-3 py-2 rounded bg-gray-800 text-white border border-gray-600">
+                        <input type="number" step="0.01" name="psf" value="{{ old('psf', 0) }}" class="w-full px-3 py-2 rounded bg-gray-800 text-white border border-gray-600">
                     </div>
                     <div>
                         <label class="block font-semibold mb-1">PS (Precio con factura):</label>
-                        <input type="number" step="0.01" name="ps" required class="w-full px-3 py-2 rounded bg-gray-800 text-white border border-gray-600">
+                        <input type="number" step="0.01" name="ps" value="{{ old('ps', 0) }}" class="w-full px-3 py-2 rounded bg-gray-800 text-white border border-gray-600">
                     </div>
                 </div>
 
