@@ -94,7 +94,7 @@
                                 <td class="py-2">{{ $productos->descripcion }}</td>
                                 <td class="py-2">{{ $productos->modelo }}</td>
                                 <td class="py-2">{{ $productos->cantidad }}</td>
-                                <td class="py-2">{{ $productos->marca->nombre }}</td>
+                                <td class="py-2">{{ $productos->marca?->nombre ?? 'Sin marca' }}</td>
                                 <td class="py-2">{{ $tipo->preciodecompra ?? 'N/A' }}</td>
                                 <td class="py-2">{{ $tipo->precioventamayor ?? 'N/A' }}</td>
                                 <td class="py-2">{{ $tipo->preciotecnico ?? 'N/A' }}</td>
