@@ -59,27 +59,27 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div>
                         <label class="block text-sm font-semibold text-blue-900 mb-1">Precio de Compra:</label>
-                        <input type="number" step="0.01" name="preciodecompra" value="{{ old('preciodecompra', $tipo->preciodecompra ?? '') }}" required class="w-full border border-gray-300 rounded px-4 py-2">
+                        <input type="number" step="0.01" name="preciodecompra" value="{{ old('preciodecompra', $tipo->preciodecompra ?? '') }}" class="w-full border border-gray-300 rounded px-4 py-2">
                     </div>
 
                     <div>
                         <label class="block text-sm font-semibold text-blue-900 mb-1">Precio Venta Mayor:</label>
-                        <input type="number" step="0.01" name="precioventamayor" value="{{ old('precioventamayor', $tipo->precioventamayor ?? '') }}" required class="w-full border border-gray-300 rounded px-4 py-2">
+                        <input type="number" step="0.01" name="precioventamayor" value="{{ old('precioventamayor', $tipo->precioventamayor ?? '') }}" class="w-full border border-gray-300 rounded px-4 py-2">
                     </div>
 
                     <div>
                         <label class="block text-sm font-semibold text-blue-900 mb-1">Precio Técnico:</label>
-                        <input type="number" step="0.01" name="preciotecnico" value="{{ old('preciotecnico', $tipo->preciotecnico ?? '') }}" required class="w-full border border-gray-300 rounded px-4 py-2">
+                        <input type="number" step="0.01" name="preciotecnico" value="{{ old('preciotecnico', $tipo->preciotecnico ?? '') }}" class="w-full border border-gray-300 rounded px-4 py-2">
                     </div>
 
                     <div>
                         <label class="block text-sm font-semibold text-blue-900 mb-1">PSF (Sin Factura):</label>
-                        <input type="number" step="0.01" name="psf" value="{{ old('psf', $tipo->psf ?? '') }}" required class="w-full border border-gray-300 rounded px-4 py-2">
+                        <input type="number" step="0.01" name="psf" value="{{ old('psf', $tipo->psf ?? '') }}" class="w-full border border-gray-300 rounded px-4 py-2">
                     </div>
 
                     <div>
                         <label class="block text-sm font-semibold text-blue-900 mb-1">PS (Con Factura):</label>
-                        <input type="number" step="0.01" name="ps" value="{{ old('ps', $tipo->ps ?? '') }}" required class="w-full border border-gray-300 rounded px-4 py-2">
+                        <input type="number" step="0.01" name="ps" value="{{ old('ps', $tipo->ps ?? '') }}" class="w-full border border-gray-300 rounded px-4 py-2">
                     </div>
                 </div>
 

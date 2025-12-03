@@ -130,7 +130,7 @@ class ProductoController extends Controller
         ]);
 
         // Actualizar producto
-        $producto = producto::findOrFail($id);
+        $producto = Producto::with(['precios.tipodeprecio'])->findOrFail($id);
         $producto->update([
             'descripcion' => $request->descripcion,
             'modelo' => $request->modelo,
@@ -138,19 +138,32 @@ class ProductoController extends Controller
             'marca_id' => $request->marca_id,
         ]);
 
-        // Actualizar precio
-        $precio = $producto->precios->first(); // accede a la relación
-        $tipo = $precio?->tipodeprecio->first(); // si existe, busca el primer tipo
+        // Obtener o crear precio
+        $precio = $producto->precios()->first();
+        if (!$precio) {
+            $precio = $producto->precios()->create([]);
+        }
 
-
-        if ($tipo) {
-            $tipo->update([
-                'preciodecompra' => $request->preciodecompra,
-                'precioventamayor' => $request->precioventamayor,
-                'preciotecnico' => $request->preciotecnico,
-                'psf' => $request->psf,
-                'ps' => $request->ps,
-            ]);
+        // Actualizar o crear tipodeprecio
+        if ($request->preciodecompra || $request->precioventamayor || $request->preciotecnico || $request->psf || $request->ps) {
+            $tipo = $precio->tipodeprecio()->first();
+            if ($tipo) {
+                $tipo->update([
+                    'preciodecompra' => $request->preciodecompra ?? 0,
+                    'precioventamayor' => $request->precioventamayor ?? 0,
+                    'preciotecnico' => $request->preciotecnico ?? 0,
+                    'psf' => $request->psf ?? 0,
+                    'ps' => $request->ps ?? 0,
+                ]);
+            } else {
+                $precio->tipodeprecio()->create([
+                    'preciodecompra' => $request->preciodecompra ?? 0,
+                    'precioventamayor' => $request->precioventamayor ?? 0,
+                    'preciotecnico' => $request->preciotecnico ?? 0,
+                    'psf' => $request->psf ?? 0,
+                    'ps' => $request->ps ?? 0,
+                ]);
+            }
         }
 
         return redirect()->route('producto.index')->with('success', 'Producto actualizado correctamente');
